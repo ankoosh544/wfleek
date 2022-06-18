@@ -1,0 +1,6 @@
+// Menu colors
+@for $i from 1 through length($menu-colors) {
+	.menu li:nth-child(#{$i}) {
+		background: nth($menu-colors, $i);
+	}
+}

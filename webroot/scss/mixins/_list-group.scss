@@ -1,0 +1,21 @@
+// List Projects
+
+@mixin list-project-item-variant($state, $background, $color) {
+  .list-project-item-#{$state} {
+    color: $color;
+    background-color: $background;
+
+    &.list-project-item-action {
+      @include hover-focus {
+        color: $color;
+        background-color: darken($background, 5%);
+      }
+
+      &.active {
+        color: $white;
+        background-color: $color;
+        border-color: $color;
+      }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+// Base class
+//
+// Easily usable on <ul>, <ol>, or <div>.
+
+.list-project {
+  display: flex;
+  flex-direction: column;
+
+  // No need to set list-style: none; since .list-project-item is block level
+  padding-left: 0; // reset padding because ul and ol
+  margin-bottom: 0;
+}
+
+
+// Interactive list items
+//
+// Use anchor or button elements instead of `li`s or `div`s to create interactive
+// list items. Includes an extra `.active` modifier class for selected items.
+
+.list-project-item-action {
+  width: 100%; // For `<button>`s (anchors become 100% by default though)
+  color: $list-project-action-color;
+  text-align: inherit; // For `<button>`s (anchors inherit)
+
+  // Hover state
+  @include hover-focus {
+    color: $list-project-action-hover-color;
+    text-decoration: none;
+    background-color: $list-project-hover-bg;
+  }
+
+  &:active {
+    color: $list-project-action-active-color;
+    background-color: $list-project-action-active-bg;
+  }
+}
+
+
+// Individual list items
+//
+// Use on `li`s or `div`s within the `.list-project` parent.
+
+.list-project-item {
+  position: relative;
+  display: block;
+  padding: $list-project-item-padding-y $list-project-item-padding-x;
+  // Place the border on the list items and negative margin up for better styling
+  margin-bottom: -$list-project-border-width;
+  background-color: $list-project-bg;
+  border: $list-project-border-width solid $list-project-border-color;
+
+  &:first-child {
+    @include border-top-radius($list-project-border-radius);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+    @include border-bottom-radius($list-project-border-radius);
+  }
+
+  @include hover-focus {
+    z-index: 1; // Place hover/active items above their siblings for proper border styling
+    text-decoration: none;
+  }
+
+  &.disabled,
+  &:disabled {
+    color: $list-project-disabled-color;
+    background-color: $list-project-disabled-bg;
+  }
+
+  // Include both here for `<a>`s and `<button>`s
+  &.active {
+    z-index: 2; // Place active items above their siblings for proper border styling
+    color: $list-project-active-color;
+    background-color: $list-project-active-bg;
+    border-color: $list-project-active-border-color;
+  }
+}
+
+
+// Flush list items
+//
+// Remove borders and border-radius to keep list project items edge-to-edge. Most
+// useful within other components (e.g., cards).
+
+.list-project-flush {
+  .list-project-item {
+    border-right: 0;
+    border-left: 0;
+    @include border-radius(0);
+  }
+
+  &:first-child {
+    .list-project-item:first-child {
+      border-top: 0;
+    }
+  }
+
+  &:last-child {
+    .list-project-item:last-child {
+      border-bottom: 0;
+    }
+  }
+}
+
+
+// Contextual variants
+//
+// Add modifier classes to change text and background color on individual items.
+// Organizationally, this must come after the `:hover` states.
+
+@each $color, $value in $theme-colors {
+  @include list-project-item-variant($color, theme-color-level($color, -9), theme-color-level($color, 6));
+}

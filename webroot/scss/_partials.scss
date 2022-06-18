@@ -1,0 +1,52 @@
+%fullscreen{
+    height: 100vh;
+    width: 100%;
+}
+%book-meta-info{
+    display: flex;
+    font-size: 0.6875rem;
+    color: #333;
+    font-weight: 800;
+    align-items: center;    
+    > div{
+        display: flex;
+        align-items: center;
+        + div{
+            padding-left: 1.2rem;
+        }
+    }
+    .icon{
+        img{
+            height: auto;
+            width: auto;
+            max-width: 21px;
+            max-height: 14px;   
+        }               
+        padding-right: 0.3rem;
+    }
+}
+
+ %rating{
+    width: 85px;
+    height: 14px;
+    background: url(../images/gray-stars.png) no-repeat left top / 100% auto;
+    position: relative;
+    .rating-bar{
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 0;
+        background: url(../images/black-stars.png) no-repeat left top / 85px auto;
+    }
+}
+%btn-outline{
+    background-color: transparent;
+    border: 1px solid;
+}
+%heading{
+    border-bottom: 1px solid #e0e1e1;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.375rem;
+    text-transform: uppercase;
+}
